@@ -5,7 +5,11 @@ describe('Airport', function(){
 
   beforeEach(function(){
     plane = jasmine.createSpyObj('plane', ['land', 'takeOff']);
-    weather = jasmine.createSpyObj('weather',['isSunny'])
+    weather = {
+      isSunny: function(){
+      }
+    };
+    spyOn(weather, 'isSunny').and.returnValue('sunny');
     airport = new Airport();
   });
 
