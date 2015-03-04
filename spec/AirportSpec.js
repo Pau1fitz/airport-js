@@ -5,11 +5,7 @@ describe('Airport', function(){
 
   beforeEach(function(){
     plane = jasmine.createSpyObj('plane', ['land', 'takeOff']);
-    weather = {
-      isSunny: function(){
-      }
-    };
-    spyOn(weather, 'isSunny').and.returnValue('sunny');
+    weather = new Weather();
     airport = new Airport();
   });
 
@@ -31,6 +27,7 @@ describe('Airport', function(){
 
   it('undocks planes before taking off', function(){
     airport.dock(plane);
+    spyOn(weather, 'isSunny').and.returnValue('sunny');
     airport.undock(plane, weather);
     expect(plane.takeOff).toHaveBeenCalled();
   });
